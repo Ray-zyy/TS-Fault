@@ -4,16 +4,6 @@
 
 ### When Clean Accuracy Lies: Benchmarking Time Series Forecasters Against Structural Faults
 
-<p>
-  <a href="https://github.com/Ray-zyy/TS-Fault"><img src="https://img.shields.io/badge/Paper-ICDE'27-b31b1b.svg" alt="Paper"></a>
-  <a href="#-license--acknowledgements"><img src="https://img.shields.io/badge/License-MIT-3da639.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/Python-3.9%2B-3776ab.svg" alt="Python">
-  <img src="https://img.shields.io/badge/PyTorch-2.5-ee4c2c.svg" alt="PyTorch">
-  <img src="https://img.shields.io/badge/Models-21-f59e0b.svg" alt="Models">
-  <img src="https://img.shields.io/badge/Datasets-6-eab308.svg" alt="Datasets">
-  <img src="https://img.shields.io/badge/Fault%20Modes-4-8b5cf6.svg" alt="Modes">
-</p>
-
 **Yuyang Zhao**¹ · **Lian Xu**² · **Hao Miao**³ · **Hao Xue**¹ ✉
 
 ¹ Hong Kong University of Science and Technology (Guangzhou) &nbsp;·&nbsp; ² The University of Western Australia &nbsp;·&nbsp; ³ The Hong Kong Polytechnic University
