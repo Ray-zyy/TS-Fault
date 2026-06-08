@@ -281,20 +281,6 @@ The most robust models (**GRU**, **LSTM**, **TCN**, near-unit ratios) are only m
   <em>Left: clean/faulted MSE-MAE and robustness ratio. Center: degradation across severities <code>d02→d10</code> and the <code>d10/d02</code> sensitivity slope. Right: per-mode relative degradation — note the jump from single-digit % under Modes I/II to <b>thousands–to–tens-of-thousands %</b> under Modes III/IV.</em>
 </div>
 
-<div align="center">
-
-| Rank by robustness | Clean MSE | Faulted MSE | Ratio `r` |
-|:---|:---:|:---:|:---:|
-| 🥇 **GRU** | 0.680 | 0.775 | **1.14** |
-| 🥈 **LSTM** | 0.733 | 0.780 | **1.07** |
-| 🥉 **TCN** | 0.874 | 7.389 | 7.9 |
-| … | … | … | … |
-| Moirai (FM) | 0.682 | 153.1 | 365.6 |
-| **TimesFM** (FM) | **0.516** | 162.7 | **555.2** |
-| Chronos (FM) | 0.613 | 165.6 | 512.5 |
-
-</div>
-
 ### Rank reordering — preserved under observation-level faults, destroyed under mechanism-level
 
 | Mode | Spearman ρ (clean vs. faulted rank) | p | Verdict |
@@ -324,21 +310,6 @@ The model ordering is highly consistent across datasets (fragility is a property
 
 TS-Fault is designed to be fully reproducible. Because faulted instances are produced by an **explicit operator at evaluation time**, the benchmark can be regenerated at any severity by re-sweeping `κ`, and previously-unexposed `Θ` combinations can be held out at release time to guard against benchmark gaming. We release the parameterized fault generators (with their `Θ` schemas and the unified window-importance front-end), the evaluation harness with per-model configs, and the master results table.
 
----
-
-## 📖 Citation
-
-If you find TS-Fault useful, please cite:
-
-```bibtex
-@inproceedings{zhao2027tsfault,
-  title     = {When Clean Accuracy Lies: Benchmarking Time Series Forecasters
-               Against Structural Faults},
-  author    = {Zhao, Yuyang and Xu, Lian and Miao, Hao and Xue, Hao},
-  booktitle = {Proceedings of the IEEE International Conference on Data Engineering (ICDE)},
-  year      = {2027}
-}
-```
 
 ---
 
