@@ -1,0 +1,16 @@
+# core (data generation, classical models, analysis, figures)
+numpy>=1.24,<2.0
+pandas>=2.0
+scipy>=1.10
+matplotlib>=3.7
+scikit-learn>=1.3
+statsmodels>=0.14
+xgboost>=2.0
+
+# deep baselines (LSTM/GRU/TCN/NLinear/NBEATS) and TSLib transformers
+torch>=2.1
+
+# optional: foundation models (install per docs/MODELS.md — they pull heavy deps)
+# timesfm
+# chronos-forecasting
+# uni2ts   (install with: pip install -e . --no-deps)
