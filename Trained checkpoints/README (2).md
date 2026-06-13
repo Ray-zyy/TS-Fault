@@ -2,7 +2,7 @@
 
 GitHub's file-size limits make it impractical to version the model weights here, so the **trained checkpoints are hosted on Hugging Face** instead:
 
-🔗 **https://huggingface.co/Ray6666/TS-Fault**
+https://huggingface.co/Ray6666/TS-Fault
 
 Download them into this folder and the evaluation scripts will pick them up automatically:
 
