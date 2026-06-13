@@ -2,15 +2,32 @@
 
 # ⚡ TS-Fault
 
-### TS-Fault：Benchmarking Time Series Forecasters Against Structural Faults
+### Benchmarking Time Series Forecasters Against Structural Faults
 
-**Yuyang Zhao**¹ · **Lian Xu**² · **Hao Miao**³ · **Chenxi Liu**4 · **Hao Xue**¹ ✉
+**Yuyang Zhao**¹ · **Lian Xu**² · **Hao Miao**³ · **Chenxi Liu**⁴ · **Hao Xue**¹ ✉
 
-¹ Hong Kong University of Science and Technology (Guangzhou) &nbsp;·&nbsp; ² The University of Western Australia &nbsp;·&nbsp; ³ The Hong Kong Polytechnic University; 4CAIR, Hong Kong Institute of Science \& Innovation, Chinese Academy of Sciences
+<sub>¹ Hong Kong University of Science and Technology (Guangzhou) &nbsp;·&nbsp; ² The University of Western Australia &nbsp;·&nbsp; ³ The Hong Kong Polytechnic University &nbsp;·&nbsp; ⁴ CAIR, Hong Kong Institute of Science & Innovation, Chinese Academy of Sciences</sub>
 
 <br>
 
-<samp>21 models &nbsp;·&nbsp; 6 datasets &nbsp;·&nbsp; 4 failure modes &nbsp;·&nbsp; 5 severity levels &nbsp;·&nbsp; 2,500 evaluated cells</samp>
+[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b.svg)](https://github.com/Ray-zyy/TS-Fault)
+[![Code](https://img.shields.io/badge/Code-GitHub-181717.svg?logo=github&logoColor=white)](https://github.com/Ray-zyy/TS-Fault)
+[![License: MIT](https://img.shields.io/badge/License-MIT-2e7d32.svg)](./LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-EE4C2C.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
+
+<samp>21 models &nbsp;·&nbsp; 6 datasets &nbsp;·&nbsp; 4 failure modes &nbsp;·&nbsp; 5 severity levels &nbsp;·&nbsp; ~2,500 evaluated cells</samp>
+
+<sub>
+  <a href="#-why-ts-fault">Why</a> &nbsp;•&nbsp;
+  <a href="#-the-four-failure-modes">Failure modes</a> &nbsp;•&nbsp;
+  <a href="#-repository-contents">Repository</a> &nbsp;•&nbsp;
+  <a href="#-datasets-clean-originals">Datasets</a> &nbsp;•&nbsp;
+  <a href="#-quick-start">Quick start</a> &nbsp;•&nbsp;
+  <a href="#-results">Results</a> &nbsp;•&nbsp;
+  <a href="#-reproducibility">Reproducibility</a> &nbsp;•&nbsp;
+  <a href="#-citation">Citation</a>
+</sub>
 
 </div>
 
@@ -35,10 +52,36 @@ TS-Fault changes the **object of evaluation**, replacing the clean test pair `(X
 
 ### Headline findings
 
-1. **Clean accuracy *anti*-correlates with robustness** — Spearman ρ = **−0.544** (p = 0.011) across all 21 models (−0.509 over the 18 non-foundation models, so foundation models *strengthen* the effect).
-2. **Observation-level faults preserve the ranking; mechanism-level faults destroy it** — ρ > **0.92** under Modes I/II vs ρ < **0.06** under Modes III/IV.
-3. **Catastrophe is structural** — all **884** catastrophic failures (≥10× error inflation) fall in the two mechanism-level modes; Modes I/II never trigger one.
-4. **Foundation models are strong but fragile** — TimesFM is **2nd** on clean MSE yet **worst** of all 21 on robustness (ratio ≈ 555).
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**1 · Clean accuracy _anti_-correlates with robustness**
+Spearman ρ = **−0.544** (p = 0.011) across all 21 models — and **−0.509** over the 18 non-foundation models, so foundation models *strengthen* the effect.
+
+</td>
+<td width="50%" valign="top">
+
+**2 · Stratified by mode**
+Observation-level faults preserve the ranking (ρ > **0.92**); mechanism-level faults destroy it (ρ < **0.06**).
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**3 · Catastrophe is structural**
+All **884** catastrophic failures (≥ 10× error inflation) fall in the two mechanism-level modes; Modes I/II never trigger one.
+
+</td>
+<td width="50%" valign="top">
+
+**4 · Strong, but fragile**
+TimesFM is **2nd** on clean MSE yet the **worst** of all 21 on robustness (ratio ≈ **555**).
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -64,7 +107,7 @@ Each mode corrupts **only the lookback window** (`L = 336`); the forecast target
 
 ## 📂 Repository contents
 
-This repository ships the **data-generation pipeline, model implementations, evaluation drivers, and the master results table**. The four fault generators are included in full, so the perturbed dataset can be regenerated from scratch — it is **not** committed as binary `.npz`.
+This repository ships the **data-generation pipeline, model implementations, evaluation drivers, trained checkpoints, and the complete results workbook**. The four fault generators are included in full, so the perturbed dataset can be regenerated from scratch — it is **not** committed as binary `.npz`.
 
 ```
 .
@@ -86,7 +129,9 @@ This repository ships the **data-generation pipeline, model implementations, eva
 ├── eval_classical_phase1.py     # evaluate classical + baseline models → results CSV
 ├── eval_foundation_phase1.py    # evaluate foundation models → results CSV
 │
-├── eval_results_full_23.csv     # master results table (wide schema)
+├── eval_results_full.xlsx       # ★ COMPLETE results workbook — every (model, dataset, mode, difficulty) cell (~2,500 rows)
+├── eval_results_full_23.csv     # the same table as a flat CSV mirror (wide schema)
+├── checkpoints/                 # released trained weights (one per trained model × dataset)
 └── figures/                     # paper figures used in this README
 ```
 
@@ -105,7 +150,7 @@ The paper evaluates **21 models** across **six methodological families**, so the
 | **Attention / SOTA** (6) | PatchTST · iTransformer · TimeXer · TimeMixer · TimesNet · Nonstationary-Transformer |
 | **Foundation, zero-shot** (3) | TimesFM · Chronos · Moirai |
 
-*Statistical, linear, and recurrent/convolutional models live in `classical_models.py`; the eight Transformer-family models are trained via the [Time-Series-Library](https://github.com/thuml/Time-Series-Library) (see [§6](#-evaluating-the-transformer-family-models)); the three foundation models run strictly zero-shot via `foundation_models.py`. The repository's `classical_models.py` additionally bundles a few exploratory baselines (e.g. RandomForest, XGBoost) that fall outside the 21-model paper subset.*
+*Statistical, linear, and recurrent/convolutional models live in `classical_models.py`; the eight Transformer-family models are trained via the [Time-Series-Library](https://github.com/thuml/Time-Series-Library) (see [§ Transformer-family](#-evaluating-the-transformer-family-models)); the three foundation models run strictly zero-shot via `foundation_models.py`. The repository's `classical_models.py` additionally bundles a few exploratory baselines (e.g. RandomForest, XGBoost) that fall outside the 21-model paper subset.*
 
 ---
 
@@ -153,7 +198,7 @@ pip install -r requirements.txt
 
 ### 2 · Get the clean datasets
 
-Download the six CSVs (see [§Datasets](#-datasets-clean-originals)) into:
+Download the six CSVs (see [§ Datasets](#-datasets-clean-originals)) into:
 
 ```
 dataset/ETT-small/{ETTh1,ETTh2,ETTm1,ETTm2}.csv
@@ -193,7 +238,7 @@ python eval_classical_phase1.py \
     --out ./results/eval_classical.csv --gpu 0 --resume
 ```
 
-**Foundation models** (zero-shot — see [§7](#-installing-the-foundation-models)):
+**Foundation models** (zero-shot — see [§ Foundation models](#-installing-the-foundation-models)):
 
 ```bash
 python eval_foundation_phase1.py \
@@ -208,7 +253,7 @@ Each evaluator emits the **canonical wide schema**, one row per `(model, dataset
 model, dataset, Mode, difficulty, mse_corrupt, mae_corrupt, mse_clean, mae_clean, n_samples, time_sec
 ```
 
-`mse_clean` is the error on the clean input window, `mse_corrupt` on the perturbed window — **both predicting the same untouched target**. The **robustness ratio** `r = mse_corrupt / mse_clean` isolates the cost of corrupted history; `r = 1` is perfect robustness and `r ≥ 10` is a **catastrophic failure**. Concatenate the per-group CSVs (classical + foundation + the TSLib Transformer rows) into the master table `eval_results_full_23.csv`.
+`mse_clean` is the error on the clean input window, `mse_corrupt` on the perturbed window — **both predicting the same untouched target**. The **robustness ratio** `r = mse_corrupt / mse_clean` isolates the cost of corrupted history; `r = 1` is perfect robustness and `r ≥ 10` is a **catastrophic failure**. Concatenate the per-group CSVs (classical + foundation + the TSLib Transformer rows) into the master workbook **`eval_results_full.xlsx`** (also mirrored as the flat `eval_results_full_23.csv`).
 
 ---
 
@@ -229,7 +274,7 @@ The eight Transformer/attention models (PatchTST, iTransformer, Autoformer, FEDf
        --train_epochs 10 --batch_size 32 --learning_rate 1e-4 --itr 1
    ```
 
-3. Score each trained checkpoint on the TS-Fault `.npz` windows (clean vs. corrupt) and write rows in the same wide schema, then merge into `eval_results_full_23.csv`.
+3. Score each trained checkpoint on the TS-Fault `.npz` windows (clean vs. corrupt) and write rows in the same wide schema, then merge into the master workbook `eval_results_full.xlsx`.
 
 <details>
 <summary><b>Shared hyperparameters & model-specific notes</b></summary>
@@ -271,6 +316,16 @@ Behind a mirror, set `export HF_ENDPOINT=https://hf-mirror.com` before the first
 
 ## 🏆 Results
 
+### The complete results workbook
+
+Every number in this README — and a great many that did not fit — is shipped in **`eval_results_full.xlsx`**, the full evaluation table. It holds **one row per `(model, dataset, mode, difficulty)` cell** for the entire grid of **21 models × 6 datasets × 4 modes × 5 severities ≈ 2,500 rows** (ARIMA is omitted on the 321-channel Electricity, where per-series fitting is impractical), under the same wide schema produced by the evaluators:
+
+```
+model · dataset · Mode · difficulty · mse_corrupt · mae_corrupt · mse_clean · mae_clean · n_samples · time_sec
+```
+
+From these columns the robustness ratio `r = mse_corrupt / mse_clean`, the relative degradation `(r − 1) × 100%`, the severity slope `d10/d02`, and every per-mode / per-dataset aggregate in the paper can be recomputed directly — no rerun required. A flat-CSV mirror is provided as `eval_results_full_23.csv`.
+
 ### Aggregate — the clean and faulted leaderboards are near mirror images
 
 The most robust models (**GRU**, **LSTM**, **TCN**, near-unit ratios) are only mid-pack on clean accuracy, while the clean-accuracy leaders (**N-BEATS**, **TimesFM**, **iTransformer**, **TimeXer**) sit at the bottom of the robustness order with ratios in the hundreds.
@@ -308,8 +363,27 @@ The model ordering is highly consistent across datasets (fragility is a property
 
 ## 🔁 Reproducibility
 
-TS-Fault is designed to be fully reproducible. Because faulted instances are produced by an **explicit operator at evaluation time**, the benchmark can be regenerated at any severity by re-sweeping `κ`, and previously-unexposed `Θ` combinations can be held out at release time to guard against benchmark gaming. We release the parameterized fault generators (with their `Θ` schemas and the unified window-importance front-end), the evaluation harness with per-model configs, and the master results table.
+TS-Fault is designed to be fully reproducible. Because faulted instances are produced by an **explicit operator at evaluation time**, the benchmark can be regenerated at any severity by re-sweeping `κ`, and previously-unexposed `Θ` combinations can be held out at release time to guard against benchmark gaming. We release:
 
+- the **parameterized fault generators** for all four modes, with their `Θ` schemas and the unified window-importance front-end;
+- the **evaluation harness** with per-model configurations;
+- the **trained checkpoints** for every trained model, so the deep and Transformer-family results can be reproduced without retraining;
+- the **complete results workbook** `eval_results_full.xlsx` (≈ 2,500 cells) plus its flat-CSV mirror.
+
+---
+
+## 📝 Citation
+
+If you find TS-Fault useful, please consider citing:
+
+```bibtex
+@inproceedings{zhao2026tsfault,
+  title     = {{TS-Fault}: Benchmarking Time Series Forecasters Against Structural Faults},
+  author    = {Zhao, Yuyang and Xu, Lian and Miao, Hao and Liu, Chenxi and Xue, Hao},
+  year      = {2026},
+  note      = {Code: \url{https://github.com/Ray-zyy/TS-Fault}}
+}
+```
 
 ---
 
