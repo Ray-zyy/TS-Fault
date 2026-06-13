@@ -2,11 +2,11 @@
 
 # ⚡ TS-Fault
 
-### When Clean Accuracy Lies: Benchmarking Time Series Forecasters Against Structural Faults
+### TS-Fault：Benchmarking Time Series Forecasters Against Structural Faults
 
-**Yuyang Zhao**¹ · **Lian Xu**² · **Hao Miao**³ · **Hao Xue**¹ ✉
+**Yuyang Zhao**¹ · **Lian Xu**² · **Hao Miao**³ · **Chenxi Liu**4 · **Hao Xue**¹ ✉
 
-¹ Hong Kong University of Science and Technology (Guangzhou) &nbsp;·&nbsp; ² The University of Western Australia &nbsp;·&nbsp; ³ The Hong Kong Polytechnic University
+¹ Hong Kong University of Science and Technology (Guangzhou) &nbsp;·&nbsp; ² The University of Western Australia &nbsp;·&nbsp; ³ The Hong Kong Polytechnic University; 4CAIR, Hong Kong Institute of Science \& Innovation, Chinese Academy of Sciences
 
 <br>
 
