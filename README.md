@@ -8,14 +8,6 @@
 
 <sub>¹ Hong Kong University of Science and Technology (Guangzhou) &nbsp;·&nbsp; ² The University of Western Australia &nbsp;·&nbsp; ³ The Hong Kong Polytechnic University &nbsp;·&nbsp; ⁴ CAIR, Hong Kong Institute of Science & Innovation, Chinese Academy of Sciences</sub>
 
-<br>
-
-[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b.svg)](https://github.com/Ray-zyy/TS-Fault)
-[![Code](https://img.shields.io/badge/Code-GitHub-181717.svg?logo=github&logoColor=white)](https://github.com/Ray-zyy/TS-Fault)
-[![License: MIT](https://img.shields.io/badge/License-MIT-2e7d32.svg)](./LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-EE4C2C.svg?logo=pytorch&logoColor=white)](https://pytorch.org/)
-
 <samp>21 models &nbsp;·&nbsp; 6 datasets &nbsp;·&nbsp; 4 failure modes &nbsp;·&nbsp; 5 severity levels &nbsp;·&nbsp; ~2,500 evaluated cells</samp>
 
 <sub>
@@ -26,7 +18,6 @@
   <a href="#-quick-start">Quick start</a> &nbsp;•&nbsp;
   <a href="#-results">Results</a> &nbsp;•&nbsp;
   <a href="#-reproducibility">Reproducibility</a> &nbsp;•&nbsp;
-  <a href="#-citation">Citation</a>
 </sub>
 
 </div>
@@ -130,8 +121,7 @@ This repository ships the **data-generation pipeline, model implementations, eva
 ├── eval_foundation_phase1.py    # evaluate foundation models → results CSV
 │
 ├── eval_results_full.xlsx       # ★ COMPLETE results workbook — every (model, dataset, mode, difficulty) cell (~2,500 rows)
-├── eval_results_full_23.csv     # the same table as a flat CSV mirror (wide schema)
-├── checkpoints/                 # released trained weights (one per trained model × dataset)
+├── checkpoints/                 # released trained weights
 └── figures/                     # paper figures used in this README
 ```
 
@@ -372,20 +362,7 @@ TS-Fault is designed to be fully reproducible. Because faulted instances are pro
 
 ---
 
-## 📝 Citation
 
-If you find TS-Fault useful, please consider citing:
-
-```bibtex
-@inproceedings{zhao2026tsfault,
-  title     = {{TS-Fault}: Benchmarking Time Series Forecasters Against Structural Faults},
-  author    = {Zhao, Yuyang and Xu, Lian and Miao, Hao and Liu, Chenxi and Xue, Hao},
-  year      = {2026},
-  note      = {Code: \url{https://github.com/Ray-zyy/TS-Fault}}
-}
-```
-
----
 
 ## 📜 License & acknowledgements
 
