@@ -15,5 +15,3 @@ snapshot_download("Ray6666/TS-Fault", local_dir="checkpoints")
 # or with the CLI
 huggingface-cli download Ray6666/TS-Fault --local-dir checkpoints
 ```
-
-These cover the trained deep and Transformer-family models (one per model × dataset). The three foundation models are zero-shot and need no checkpoints — their pretrained weights are listed in the main [README](../README.md).
