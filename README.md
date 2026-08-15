@@ -129,9 +129,6 @@ This repository ships the **data-generation pipeline, model implementations, eva
 └── figures/                     # paper figures used in this README
 ```
 
-> **Plotting scripts and the generated `TS-Fault_output/` `.npz` files are not committed** — the perturbed data is fully reproducible from `run_TS-Fault.py` + the four `Mode*.py` generators.
-
-
 ### The 21 evaluated forecasters
 
 The paper evaluates **21 models** across **six methodological families**, so the conclusions are not an artifact of a single inductive bias:
