@@ -153,7 +153,6 @@ The paper evaluates **21 models** across **six methodological families**, so the
 
 TS-Fault perturbs **nine** long-horizon datasets spanning **six domains** — energy, load, climate, finance, IT/Ops, and healthcare — deliberately chosen to cover a wide range of **dimensionality** (7 → 321 channels) and **granularity** (5-second → daily). Every clean window is a **length-336 history** and a **length-96 target**. We do **not** redistribute the raw data — download it and place each file at the path the loader expects.
 
-The first six are the datasets of the original release; the last three were added to answer the domain-coverage question and are evaluated under the identical protocol.
 
 | Dataset | Domain | Channels | Granularity | Size | Path expected |
 |:---|:---|:---:|:---|:---|:---|
