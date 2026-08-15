@@ -126,9 +126,11 @@ This repository ships the **data-generation pipeline, model implementations, eva
 ├── foundation_models.py         # TimesFM / Chronos / Moirai (zero-shot wrappers)
 ├── eval_classical_phase1.py     # evaluate classical + baseline models → results CSV
 ├── eval_foundation_phase1.py    # evaluate foundation models → results CSV
-│
-├── eval_results_full.xlsx       # ★ COMPLETE results workbook — every (model, dataset, mode, difficulty) cell (~2,500 rows)
 ├── checkpoints/                 # released trained weights
+├── ablation_placement.py        # window-placement ablation: top-K S(W) vs random vs anti-selected
+├── ablation_lambda.py           # one-at-a-time sensitivity of the S(W) weights λ
+├── adapt_foundation.py          # LP / FT / FT-fault adaptation of the three foundation models
+├── compose_faults.py            # ⊛ compound faults: T_B ∘ T_A at matched severity
 └── figures/                     # paper figures used in this README
 ```
 
