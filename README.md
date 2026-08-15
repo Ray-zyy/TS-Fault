@@ -1,8 +1,3 @@
----
-title: <div align="center">
-
----
-
 <div align="center">
 
 # ⚡ TS-Fault
