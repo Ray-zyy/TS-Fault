@@ -555,9 +555,8 @@ $$
 We report two complementary quantities:
 
 * **WC MSE** — the maximum per-configuration faulted MSE over the released grid, directly discretising Eq. (3).
-* **WC `r`** — within each dataset, the maximum configuration-level robustness ratio, then averaged across the six datasets. This uses the same within-dataset-then-average convention as AVG `r`, so the two columns are directly comparable.
+* **WC `r`** — within each dataset, the maximum configuration-level robustness ratio, then averaged across the datasets. This uses the same within-dataset-then-average convention as AVG `r`, so the two columns are directly comparable.
 
-> **Scope.** These WC values correspond to the original six-dataset grid used in the submitted paper. The finance, IT/Ops, and healthcare extensions reported above are not folded into this table.
 
 **Worst-case risk over all four modes.** `WC/AVG` is the ratio between the worst-case and average robustness risks.
 
