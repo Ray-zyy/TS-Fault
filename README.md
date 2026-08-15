@@ -541,6 +541,84 @@ python adapt_foundation.py --model timesfm --setting ft_fault \
 * **Only fault structure in the training signal closes the gap.** FT-fault drops the ratios to **12.2 / 14.3 / 9.74** and faulted MSE by a further 7.4–8.6× over clean fine-tuning, at a clean-accuracy cost of just **9–10%**. Note this is measured on **held-out severities** — the models never saw `s₃`–`s₅` during adaptation, so this is generalisation along `κ`, not memorisation of a severity.
 * **The gap is narrowed, not closed.** The best adapted model (Moirai FT-fault, `r = 9.74`) is still ~9× less robust than a plain trained LSTM (`r = 1.07`). The accurate-*and*-robust quadrant remains empty.
 
+
+
+### 5 · Worst-case risk — average behavior can hide adverse configurations
+
+Average risk (`AVG`) describes typical behavior over the released fault grid; worst-case risk (`WC`) asks for the most damaging released configuration:
+
+$$
+\mathrm{WC}(f,\mathcal F)=\sup_{\Theta\in\Phi}\mathbb E[\ell\mid\Theta].
+$$
+
+
+We report two complementary quantities:
+
+* **WC MSE** — the maximum per-configuration faulted MSE over the released grid, directly discretising Eq. (3).
+* **WC `r`** — within each dataset, the maximum configuration-level robustness ratio, then averaged across the six datasets. This uses the same within-dataset-then-average convention as AVG `r`, so the two columns are directly comparable.
+
+> **Scope.** These WC values correspond to the original six-dataset grid used in the submitted paper. The finance, IT/Ops, and healthcare extensions reported above are not folded into this table.
+
+**Worst-case risk over all four modes.** `WC/AVG` is the ratio between the worst-case and average robustness risks.
+
+| Model | Clean MSE | AVG MSE | **WC MSE** | AVG `r` | **WC `r`** | WC/AVG | WC attained at |
+|:---|---:|---:|---:|---:|---:|---:|:---|
+| Naive | 1.238 | 129 | **1,377** | 106 | **644** | 6.1× | Electricity / III / `d10` |
+| SeasonalNaive | 0.905 | 119 | **1,270** | 166 | **1,121** | 6.8× | Electricity / III / `d10` |
+| ARIMA | 0.999 | 122 | **1,069** | 121 | **695** | 5.8× | ETTh1 / III / `d10` |
+| ETS | 1.044 | 127 | **1,352** | 123 | **754** | 6.1× | Electricity / III / `d10` |
+| DLinear | 0.562 | 66.8 | **675** | 197 | **1,374** | 7.0× | Electricity / III / `d10` |
+| NLinear | 0.540 | 72.2 | **644** | 142 | **826** | 5.8× | ETTh1 / III / `d10` |
+| N-BEATS | 0.449 | 21.6 | **564** | 54.6 | **368** | 6.7× | Electricity / III / `d10` |
+| LSTM | 0.733 | 0.78 | **1.04** | 1.07 | **1.25** | 1.2× | ETTh1 / III / `d10` |
+| GRU | 0.680 | 0.77 | **1.19** | 1.14 | **1.50** | 1.3× | ETTh1 / IV / `d10` |
+| TCN | 0.874 | 7.39 | **138** | 7.89 | **61.4** | 7.8× | Electricity / III / `d08` |
+| Autoformer | 0.822 | 24.2 | **264** | 48.0 | **321** | 6.7× | Electricity / III / `d10` |
+| FEDformer | 1.072 | 24.3 | **258** | 22.6 | **135** | 6.0× | Electricity / III / `d10` |
+| PatchTST | 0.551 | 86.6 | **919** | 263 | **1,863** | 7.1× | Electricity / III / `d10` |
+| iTransformer | 0.529 | 83.2 | **905** | 272 | **2,008** | 7.4× | Electricity / III / `d10` |
+| TimeXer | 0.537 | 88.0 | **1,085** | 301 | **2,170** | 7.2× | Electricity / III / `d10` |
+| TimeMixer | 0.590 | 90.1 | **889** | 264 | **1,859** | 7.0× | Electricity / III / `d10` |
+| TimesNet | 0.571 | 53.3 | **500** | 142 | **964** | 6.8× | Electricity / III / `d10` |
+| NS Transformer | 0.608 | 55.2 | **571** | 101 | **635** | 6.3× | Electricity / III / `d10` |
+| TimesFM | 0.516 | 163 | **1,746** | 555 | **4,073** | 7.3× | Electricity / III / `d10` |
+| Chronos | 0.613 | 166 | **1,757** | 513 | **3,745** | 7.3× | Electricity / III / `d10` |
+| Moirai | 0.682 | 153 | **1,530** | 366 | **2,544** | 7.0× | Electricity / III / `d10` |
+
+**Per-mode worst-case risk.** Each cell reports `WC r / WC MSE`.
+
+| Model | Mode I | Mode II | Mode III | Mode IV |
+|:---|---:|---:|---:|---:|
+| Naive | 1.04 / 2.07 | 1.00 / 2.01 | 644 / 1,377 | 285 / 508 |
+| SeasonalNaive | 1.46 / 2.36 | 1.17 / 2.23 | 1,121 / 1,270 | 303 / 455 |
+| ARIMA | 1.10 / 1.60 | 1.02 / 1.47 | 695 / 1,069 | 376 / 509 |
+| ETS | 1.06 / 1.70 | 1.00 / 1.63 | 754 / 1,352 | 327 / 499 |
+| DLinear | 1.49 / 0.98 | 1.06 / 0.93 | 1,374 / 675 | 281 / 309 |
+| NLinear | 1.47 / 1.00 | 1.24 / 1.00 | 826 / 644 | 390 / 364 |
+| N-BEATS | 1.20 / 1.90 | 1.05 / 1.45 | 361 / 564 | 127 / 68.2 |
+| LSTM | 1.00 / 0.91 | 1.00 / 0.91 | **1.23 / 1.04** | **1.17 / 1.01** |
+| GRU | 1.01 / 0.88 | 1.00 / 0.87 | **1.41 / 1.13** | **1.40 / 1.19** |
+| TCN | 1.00 / 1.05 | 1.01 / 1.08 | 60.8 / 138 | 16.9 / 67.4 |
+| Autoformer | 1.26 / 1.23 | 1.14 / 1.21 | 321 / 264 | 57.2 / 104 |
+| FEDformer | 1.07 / 1.51 | 1.05 / 1.44 | 135 / 258 | 50.8 / 106 |
+| PatchTST | 1.52 / 1.29 | 1.24 / 1.02 | 1,863 / 919 | 372 / 349 |
+| iTransformer | 1.58 / 1.01 | 1.12 / 0.90 | 2,008 / 905 | 403 / 341 |
+| TimeXer | 1.45 / 1.04 | 1.08 / 0.96 | 2,170 / 1,085 | 380 / 325 |
+| TimeMixer | 1.44 / 1.01 | 1.07 / 0.95 | 1,859 / 889 | 371 / 383 |
+| TimesNet | 1.64 / 1.06 | 1.14 / 1.11 | 964 / 500 | 231 / 247 |
+| NS Transformer | 1.62 / 1.12 | 1.61 / 1.79 | 627 / 571 | 286 / 304 |
+| TimesFM | 1.33 / 0.98 | 1.08 / 1.06 | 4,073 / 1,746 | 561 / 575 |
+| Chronos | 1.25 / 1.03 | 1.03 / 0.95 | 3,745 / 1,757 | 588 / 589 |
+| Moirai | 1.19 / 1.21 | 1.03 / 1.18 | 2,544 / 1,530 | 464 / 556 |
+
+Three conclusions follow:
+
+* **WC is not a restatement of AVG.** The WC/AVG gap is only 1.2–1.3× for LSTM/GRU but roughly 7× for the attention and foundation-model cluster. Typical degradation therefore does not bound adverse degradation.
+* **The worst configurations are mechanism-level.** Twenty of the 21 models attain their overall WC in Mode III and GRU attains it in Mode IV. Twenty peak at `d10`; TCN is the sole exception, peaking at `d08`.
+* **Observation-level faults remain bounded.** No model exceeds `WC r = 1.64` in Modes I/II, whereas 19 of 21 exceed `WC r = 10` in both Modes III and IV. LSTM and GRU are the only exceptions.
+
+
+
 ---
 
 ## 🔁 Reproducibility
