@@ -40,7 +40,7 @@
 
 For two decades, long-horizon forecasting progress has been measured by **one number** — average error on clean, complete, evenly-sampled held-out data — under the implicit assumption that it predicts deployed reliability. Real faults are not white noise. They are *structured events*: a transient with onset–peak–decay, a silently broken cross-variable dependency, a regime change coupled with block-missingness, a fault cascading through a sensing pipeline. None of these can be expressed by i.i.d. perturbations, no matter how the variance or masking rate is tuned.
 
-TS-Fault changes the **object of evaluation**, replacing the clean test pair `(X, Y)` with a structured instance `(X̃, Ỹ, Θ, δ)` produced by an explicit, parameterized fault operator. Because `Θ` is exposed, a model's degradation can be attributed to a **named mechanism** at a **tunable severity** — turning a pass/fail noise test into an ablation-style diagnostic tool. It is the time-series counterpart to **ImageNet-C**.
+TS-Fault changes the **object of evaluation**, replacing the clean test pair `(X, Y)` with a structured instance `(X̃, Ỹ, Θ, δ)` produced by an explicit, parameterized fault operator. Because `Θ` is exposed, a model's degradation can be attributed to a **named mechanism** at a **tunable severity** — turning a pass/fail noise test into an ablation-style diagnostic tool.
 
 ### Headline findings
 
