@@ -205,7 +205,7 @@ dataset/electricity/electricity.csv
 dataset/weather/weather.csv
 dataset/exchange_rate/exchange_rate.csv
 dataset/bizitobs/service_kpi.csv
-dataset/vitaldb/vitaldb_core.csv        # written by prepare_vitaldb.py
+dataset/vitaldb/vitaldb_core.csv  
 ```
 
 ### 3 · Generate the perturbed benchmark
