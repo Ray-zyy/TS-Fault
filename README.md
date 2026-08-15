@@ -181,7 +181,6 @@ for f in ["ETT-small/ETTh1.csv", "ETT-small/ETTh2.csv",
 * **VitalDB (healthcare):** Lee et al., *Scientific Data* 2022 — <https://vitaldb.net/dataset/>
 * **TSLib data instructions:** <https://github.com/thuml/Time-Series-Library>
 
-Each CSV has a leading `date` column, the feature columns, and a target column `OT` (standard TSLib convention). For **VitalDB-Core** we build one long multivariate series per surgical case from the eight core waveforms/vitals resampled to 5 s, drop cases shorter than `336 + 96` steps, and window inside a case so no window straddles two patients — `prepare_vitaldb.py` performs this and writes the loader-ready CSV.
 </details>
 
 ---
