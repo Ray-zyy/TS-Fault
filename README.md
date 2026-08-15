@@ -550,8 +550,6 @@ TS-Fault is designed to be fully reproducible. Because faulted instances are pro
 - the **parameterized fault generators** for all four modes, with their `Θ` schemas and the unified window-importance front-end — plus `compose_faults.py` for the compound-fault operator `TΘ_B ∘ TΘ_A`;
 - the **exact `λ` and `β` values** used by `S(W)` and `κ` in every mode, with the placement and weight ablations that probe them (`ablation_placement.py`, `ablation_lambda.py`);
 - the **evaluation harness** with per-model configurations, and `adapt_foundation.py` for the LP / FT / FT-fault adaptation protocol;
-- the **trained checkpoints** for every trained model — including the adapted foundation models — so the deep, Transformer-family and adaptation results can be reproduced without retraining;
-- the **complete results workbook** `eval_results_full.xlsx` (≈ 3,800 cells over 9 datasets) plus its flat-CSV mirror, and the four extended-experiment CSVs.
 
 ---
 
