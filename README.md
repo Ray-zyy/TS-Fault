@@ -100,7 +100,7 @@ Each mode corrupts **only the lookback window** (`L = 336`); the forecast target
 
 ## 📂 Repository contents
 
-This repository ships the **data-generation pipeline, model implementations, evaluation drivers, trained checkpoints, and the complete results workbook**. The four fault generators are included in full, so the perturbed dataset can be regenerated from scratch — it is **not** committed as binary `.npz`.
+This repository ships the **data-generation pipeline, model implementations, evaluation drivers, trained checkpoints, and the complete results workbook**. The four fault generators are included in full, so the perturbed dataset can be regenerated from scratch.
 
 ```
 .
